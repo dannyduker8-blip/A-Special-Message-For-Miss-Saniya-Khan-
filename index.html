@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Ramdan Partner?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffebee;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* The Photo Container */
+        .photo-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+            background-color: #ddd; /* Placeholder color */
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            color: #d32f2f;
+            font-size: 2.5rem;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 20px;
+            z-index: 10;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        #yesBtn {
+            background-color: #ff4081;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #9e9e9e;
+            color: white;
+            position: relative;
+        }
+
+        /* Falling Hearts Animation */
+        .heart-fall {
+            position: absolute;
+            top: -10%;
+            color: #ff80ab;
+            font-size: 1.5rem;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="photo-container">
+        <img src="https://ibb.co/tMQ55X6f" alt="Us" id="couplePhoto">
+    </div>
+
+    <h1 id="question">Will you be my Ramadan Partner? 🌹</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="celebrate()">Yes</button>
+        <button id="noBtn" onmouseover="moveButton()">No</button>
+    </div>
+
+    <script>
+        let yesSize = 1;
+
+        // Create falling hearts continuously
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            // Remove heart after it falls to keep the page fast
+            setTimeout(() => heart.remove(), 5000);
+        }, 300);
+
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+
+            // Move the No button
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+
+            // Grow the Yes button
+            yesSize += 0.4;
+            yesBtn.style.transform = `scale(${yesSize})`;
+        }
+
+        function celebrate() {
+            document.body.innerHTML = `
+                <div style="text-align:center; z-index: 100;">
+                    <h1 style="font-size: 4rem;">YES! you're my best Habibi ever! 💖</h1>
+                    <p style="font-size: 1.5rem; color: #d32f2f;">I've already started the countdown!</p>
+                </div>
+            `;
+            document.body.style.backgroundColor = "#fce4ec";
+            // Extra burst of hearts could go here!
+        }
+    </script>
+</body>
+</html>
